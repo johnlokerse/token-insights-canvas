@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="canvas-token" content="__TOKEN__" />
+<title>Token Insights</title>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<header class="top">
+    <div>
+        <h1>Token Insights</h1>
+        <p class="muted" id="subtitle">Loading usage…</p>
+    </div>
+    <div class="top-actions">
+        <button id="btn-import" type="button" title="Import a GitHub AI usage report CSV (Billing → AI usage → Download report)">Import CSV…</button>
+        <button id="btn-refresh" type="button">Refresh</button>
+        <input id="file" type="file" accept=".csv,text/csv" multiple hidden />
+    </div>
+</header>
+
+<div id="banner" class="banner" hidden></div>
+
+<section class="kpis" id="kpis" aria-label="Key figures"></section>
+
+<section class="panel">
+    <div class="controls" id="controls">
+        <label class="ctl">Range
+            <select id="range"></select>
+        </label>
+        <span class="ctl custom-range" id="custom-range" hidden>
+            <input type="date" id="from" aria-label="From" /> – <input type="date" id="to" aria-label="To" />
+        </span>
+        <div class="ctl seg" role="group" aria-label="Mode">
+            <button type="button" data-mode="daily">Per day</button>
+            <button type="button" data-mode="cumulative">Cumulative</button>
+        </div>
+        <label class="ctl check"><input type="checkbox" id="split" /> Split by model</label>
+        <label class="ctl check"><input type="checkbox" id="log" /> Log scale</label>
+        <label class="ctl check"><input type="checkbox" id="zeros" /> Show idle days</label>
+        <label class="ctl">Day boundary
+            <select id="tz">
+                <option value="utc">UTC (billing)</option>
+                <option value="local">Local time</option>
+            </select>
+        </label>
+    </div>
+    <div class="chips" id="metrics" role="group" aria-label="Metrics"></div>
+    <div class="chart-wrap" id="chart-wrap">
+        <svg id="chart" role="img" aria-label="Token usage per day"></svg>
+        <div class="tooltip" id="tooltip" hidden></div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="coverage-legend muted">
+        Source per day:
+        <span><i class="sw src-csv"></i>GitHub report (all surfaces)</span>
+        <span><i class="sw src-local"></i>Local request log</span>
+        <span><i class="sw src-mixed"></i>Local + estimate</span>
+        <span><i class="sw src-approx"></i>Estimated from session summaries</span>
+    </div>
+</section>
+
+<div class="grid2">
+    <section class="panel">
+        <h2>Token mix</h2>
+        <div id="mix"></div>
+    </section>
+    <section class="panel">
+        <h2>Models</h2>
+        <div id="models"></div>
+    </section>
+</div>
+
+<section class="panel">
+    <h2>Data sources &amp; coverage</h2>
+    <div id="coverage"></div>
+    <details class="howto">
+        <summary>Fill gaps with GitHub's AI usage report</summary>
+        <ol>
+            <li>Open <strong>github.com → Settings → Billing and licensing → AI usage</strong>.</li>
+            <li>Pick a period (max. 31 days per export) and choose <strong>Download report</strong>.</li>
+            <li>Click <strong>Import CSV…</strong> here (you can select several files at once). Imported days replace local data because the report covers every Copilot surface (IDE, github.com, CLI, cloud agent).</li>
+        </ol>
+        <label class="ctl">GitHub username for multi-user reports
+            <input id="username" type="text" placeholder="auto-detect" autocomplete="off" />
+        </label>
+    </details>
+</section>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>
