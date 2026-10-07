@@ -22,10 +22,6 @@ Pick one of the following:
 
 Then ask Copilot to open the **Token Insights** canvas.
 
-### Requirements
-
-- Reading the per-request log uses `node:sqlite` (Node 22.5+). If that isn't available, it falls back to the `sqlite3` command-line tool, which ships with macOS.
-
 ## Data sources
 
 | Source | Location | Covers | Accuracy |
@@ -56,14 +52,3 @@ Days covered by an imported CSV replace local data for those days. The coverage 
 | `set_view` | Change range, metrics, mode, split by model, scale or timezone; open panels update live |
 | `import_csv` | Import a usage report CSV from a local path |
 | `refresh` | Re-read all sources |
-
-## Files
-
-- `extension.mjs`: canvas registration and agent actions.
-- `lib/sources.mjs`: readers for SQLite, shutdown events and CSV imports.
-- `lib/aggregate.mjs`: merges the sources into a per-day dataset.
-- `lib/metrics.mjs`: metrics, KPIs and chart series (shared with the browser).
-- `lib/server.mjs`: loopback HTTP server with Server-Sent Events.
-- `web/`: the canvas UI (no dependencies; hand-written SVG chart).
-
-Settings, imports and caches are stored in `artifacts/` inside the extension folder. Git ignores that folder.
