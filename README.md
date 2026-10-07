@@ -1,5 +1,7 @@
 # Token Insights canvas
 
+<img width="2806" height="2018" alt="token-insights-preview" src="https://github.com/user-attachments/assets/0a265ab8-44ff-42aa-8faf-7b5b26994983" />
+
 A canvas extension for the GitHub Copilot app that shows a dashboard of your Copilot token usage:
 
 - **Totals**: lifetime (since the earliest data available), current month, today, average per active day, peak day and top model.
