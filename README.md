@@ -14,8 +14,7 @@ Everything runs locally. Your usage data never leaves your machine.
 
 Pick one of the following:
 
-- **Copilot app**: run *Install extension* (or ask the agent to use `install_extension`) with
-  `https://github.com/johnlokerse/token-insights-canvas/tree/main` and the name `token-insights`.
+- **Copilot app**: Go to `Customize` -> Add -> Canvas from URL -> Use value `https://github.com/johnlokerse/token-insights-canvas/tree/main` -> Click install
 - **Manual**: clone into your user extensions folder, then reload extensions:
 
   ```sh
